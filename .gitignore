@@ -1,4 +1,6 @@
 node_modules/
 artifacts/
 test-results.xml
+allure-results/
+allure-report/
 .env

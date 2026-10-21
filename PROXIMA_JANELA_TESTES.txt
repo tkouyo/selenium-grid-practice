@@ -1,0 +1,58 @@
+PLANO DE TESTES PARA A PROXIMA JANELA
+
+Projeto: Selenium Grid Practice
+Pagina sob teste: https://testautomationpractice.blogspot.com/
+
+CONTEXTO
+- Os testes usam Mocha, Selenium WebDriver e Page Objects.
+- Reutilize os metodos em src/pages/ e os hooks em test/support/hooks.js.
+- Cada teste recebe uma nova sessao de navegador e abre a pagina publica.
+- Mantenha os titulos dos testes em portugues do Brasil.
+- A pagina e de terceiros; confirme o comportamento observado antes de fixar uma mensagem como expectativa.
+
+TESTES PENDENTES SUGERIDOS
+
+1. Slider: testar a segunda alca
+Arquivo: test/interaction-widgets.test.js
+- Mover o valor final para a esquerda e confirmar o valor apresentado.
+- Verificar os limites minimo e maximo da segunda alca.
+- Tentar mover a segunda alca para antes da inicial e verificar se o componente bloqueia ou limita o movimento.
+- Preferir teclado ou valores do componente a coordenadas fixas de tela.
+
+2. Validacoes HTML do formulario
+Arquivo: test/data-entry-form.test.js
+- Verificar que o campo nome e obrigatorio e que os limites de caracteres configurados sao respeitados.
+- Confirmar os atributos de maxlength dos campos nome, email e telefone.
+- Antes de testar submissao, confirmar se a pagina realmente oferece um botao de envio associado ao formulario principal. Nao afirmar persistencia de dados: atualmente nao ha fluxo de envio coberto.
+
+3. Metadados do upload
+Arquivo: test/file-uploads.test.js
+- Alem de nomes e tamanhos, validar o tipo de arquivo apresentado no status.
+- Para o upload multiplo, confirmar que todos os arquivos selecionados aparecem uma vez cada.
+- Usar arquivos temporarios locais e remove-los ao final do suite.
+- O upload atual e apenas demonstrativo no navegador; nao ha envio para servidor.
+
+4. Paginacao completa de produtos
+Arquivo: test/tables.test.js
+- Validar as paginas 3 e 4, incluindo o primeiro e o ultimo produto de cada pagina.
+- Verificar retorno a pagina inicial e comportamento nos limites da paginacao.
+- Nao comparar metricas dinamicas da pagina.
+
+5. Cancelamento do prompt
+Arquivo: test/alerts.test.js
+- Abrir o prompt e cancelar sem digitar um nome.
+- Observar e validar o resultado exibido pela pagina apos o cancelamento.
+- Manter separado do caso atual que aceita o prompt com um nome.
+
+JA COBERTO - EVITAR DUPLICAR
+- Datas: calendarios, formatos, intervalo ausente/invertido, um mes, um ano comum, ano bissexto, datas iguais e duracao valida (test/data-dates.test.js).
+- Upload: ausencia de arquivo e selecao de arquivo unico e multiplo (test/file-uploads.test.js).
+- Cores: opcoes disponiveis e selecao multipla (test/color-validations.test.js).
+- Slider: movimento da primeira alca, valores menor/igual e bloqueio de cruzamento (test/interaction-widgets.test.js).
+- Drag-and-drop valido/invalido, hover, duplo clique Copy Text, SVG e codigos HTTP dos links (test/interaction-widgets.test.js).
+
+COMANDOS UTEIS
+- Suíte inteira: npm test
+- Filtrar uma area: npm test -- --grep "Slider"
+- Gerar resultados Allure: npm run test:allure
+- Gerar o HTML Allure: npm run allure:generate

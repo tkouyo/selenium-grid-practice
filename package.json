@@ -7,12 +7,17 @@
     "test": "mocha",
     "test:parallel": "mocha --parallel --jobs 2",
     "test:junit": "mocha --reporter xunit > test-results.xml",
+    "test:allure": "mocha --reporter allure-mocha",
+    "allure:generate": "allure generate allure-results --clean --output allure-report",
+    "allure:open": "allure open allure-report --host 127.0.0.1",
     "test:grid": "npm run test:junit",
     "grid:up": "docker compose up -d",
     "grid:down": "docker compose down",
     "grid:wait": "node scripts/wait-for-grid.js"
   },
   "devDependencies": {
+    "allure": "^3.21.0",
+    "allure-mocha": "^3.14.0",
     "mocha": "^12.0.3",
     "selenium-webdriver": "^4.39.0"
   }

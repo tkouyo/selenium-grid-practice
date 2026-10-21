@@ -69,6 +69,16 @@ O endpoint pode ser alterado por `SELENIUM_REMOTE_URL`. Para outro navegador, ad
 
 `npm run test:junit` grava `test-results.xml` com o reporter XUnit integrado ao Mocha. O reporter roda serialmente; o Mocha paralelo e validado separadamente com `npm run test:parallel`. O GitHub Actions executa Chrome e Firefox em jobs separados, inicia o Grid e publica o XML e a pasta `artifacts/` como artefatos. Em falhas, o hook tenta salvar screenshot, stack trace e logs de console do navegador; indisponibilidade dos logs nao substitui a falha original.
 
+Para gerar um relatorio Allure local:
+
+```powershell
+npm run test:allure
+npm run allure:generate
+npm run allure:open
+```
+
+Os resultados brutos ficam em `allure-results/` e o relatorio HTML em `allure-report/`. `allure:generate` substitui o relatorio HTML anterior. Esses diretorios sao locais e estao no `.gitignore`; o Allure CLI 3 nao requer Java.
+
 Para limitar carga no site publico, o Grid aceita uma sessao por Node e os comandos paralelos usam no maximo dois workers. Os testes criam e encerram uma sessao por caso, nao repetem casos automaticamente e nao verificam metricas dinamicas. A suite de links consulta URLs externas que devem responder com status HTTP de erro entre 400 e 503.
 
 ## Escopo e limitacoes
