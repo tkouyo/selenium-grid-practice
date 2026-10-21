@@ -1,0 +1,19 @@
+{
+  "name": "selenium-grid-practice",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Cross-browser Selenium WebDriver tests with Selenium Grid 4.",
+  "scripts": {
+    "test": "mocha",
+    "test:parallel": "mocha --parallel --jobs 2",
+    "test:junit": "mocha --reporter xunit > test-results.xml",
+    "test:grid": "npm run test:junit",
+    "grid:up": "docker compose up -d",
+    "grid:down": "docker compose down",
+    "grid:wait": "node scripts/wait-for-grid.js"
+  },
+  "devDependencies": {
+    "mocha": "^12.0.3",
+    "selenium-webdriver": "^4.39.0"
+  }
+}

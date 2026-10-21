@@ -1,0 +1,40 @@
+name: Selenium tests
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      max-parallel: 2
+      matrix:
+        browser: [chrome, firefox]
+    env:
+      BROWSER: ${{ matrix.browser }}
+      EXECUTION_MODE: grid
+      SELENIUM_REMOTE_URL: http://localhost:4444
+      HEADLESS: "true"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run grid:up
+      - run: npm run grid:wait
+      - run: npm run test:grid
+      - if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: selenium-${{ matrix.browser }}-results
+          path: |
+            test-results.xml
+            artifacts/
+          if-no-files-found: ignore
+      - if: always()
+        run: npm run grid:down
