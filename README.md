@@ -95,4 +95,4 @@ Para limitar carga no site publico, o Grid aceita uma sessao por Node e os coman
 
 ## CI
 
-O workflow `.github/workflows/selenium.yml` roda em push, pull request e acionamento manual. Nao usa credenciais ou secrets.
+O workflow `.github/workflows/selenium.yml` roda em push, pull request e acionamento manual. Usa `ubuntu-24.04` explicitamente para evitar a migracao automatica de `ubuntu-latest` para Ubuntu 26.04 durante a transicao anunciada pelo GitHub. Nao usa credenciais ou secrets.
